@@ -9,8 +9,12 @@ const usuarios = [];
 const tweets = [];
 
 app.post('/sign-up', (req, res) => {
-    usuarios.push(req.body);
-    res.status(201).send('OK');
+    if (req.body.username === "" || req.body.avatar === "") {
+        res.status(400).send('Todos os campos são obrigatórios!');
+    } else {
+        usuarios.push(req.body);
+        res.status(201).send('OK');
+    }
 });
   
 app.get('/sign-up', (req, res) => {
@@ -32,10 +36,14 @@ app.get('/tweets', (req, res) => {
 });
 
 app.post('/tweets', (req, res) => {
-    const usuario = usuarios.find(item => item.username === req.body.username);
-    const tweet = {...req.body, avatar: usuario.avatar};
-    tweets.push(tweet);
-    res.status(201).send('OK');
+    if (req.body.username === "" || req.body.tweet === "") {
+        res.status(400).send('Todos os campos são obrigatórios!');
+    } else {
+        const usuario = usuarios.find(item => item.username === req.body.username);
+        const tweet = {...req.body, avatar: usuario.avatar};
+        tweets.push(tweet);
+        res.status(201).send('OK');
+    }
 });
 
 app.listen(5000);
