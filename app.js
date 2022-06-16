@@ -44,6 +44,111 @@ const tweets = [
 		username: "molusco",
 		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
 	  tweet: "eu amo o hub 5"
+	},
+    {
+		username: "bobesponja",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 6"
+	},
+    {
+		username: "patrick",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 7"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 8"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 9"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 10"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 11"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 12"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 13"
+	},
+    {
+		username: "bobesponja",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 1"
+	},
+    {
+		username: "patrick",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 2"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 3"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 4"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 5"
+	},
+    {
+		username: "bobesponja",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 6"
+	},
+    {
+		username: "patrick",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 7"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 8"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 9"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 10"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 11"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 12"
+	},
+    {
+		username: "molusco",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub 13"
 	}
 ];
 
@@ -61,17 +166,20 @@ app.get('/sign-up', (req, res) => {
 });
 
 app.get('/tweets', (req, res) => {
+    const page = req.query.page;
     let tweetsPublicados = [];
-    if (tweets.length <= 10) {
+
+    if (page >= 1) {
         for (let i = tweets.length - 1; i >= 0; i--) {
             tweetsPublicados.push(tweets[i]);
         }
+        tweetsPublicados = tweetsPublicados.slice(page*10 - 10, page*10);
+        res.send(tweetsPublicados);
     } else {
-        for (let i = tweets.length - 1; i >= tweets.length - 10; i--) {
-            tweetsPublicados.push(tweets[i]);
-        }
+        res.sendStatus(400);
+        console.log("aqui");
     }
-    res.send(tweetsPublicados);
+    
 });
 
 app.post('/tweets', (req, res) => {
@@ -99,7 +207,6 @@ app.get('/tweets/:username', (req, res) => {
         }
     }
     res.send(tweetsPublicados);
-
 });
 
 app.listen(5000);
