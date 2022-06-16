@@ -177,7 +177,6 @@ app.get('/tweets', (req, res) => {
         res.send(tweetsPublicados);
     } else {
         res.sendStatus(400);
-        console.log("aqui");
     }
     
 });
