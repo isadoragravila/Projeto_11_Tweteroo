@@ -9,8 +9,7 @@ const usuarios = [];
 
 app.post('/sign-up', (req, res) => {
     usuarios.push(req.body);
-    console.log(usuarios);
-    res.send(usuarios);
+    res.send("OK");
 });
   
 app.get('/sign-up', (req, res) => {
