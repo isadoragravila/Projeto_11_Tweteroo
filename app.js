@@ -10,7 +10,7 @@ const tweets = [];
 
 app.post('/sign-up', (req, res) => {
     usuarios.push(req.body);
-    res.send("OK");
+    res.status(201).send('OK');
 });
   
 app.get('/sign-up', (req, res) => {
@@ -35,7 +35,7 @@ app.post('/tweets', (req, res) => {
     const usuario = usuarios.find(item => item.username === req.body.username);
     const tweet = {...req.body, avatar: usuario.avatar};
     tweets.push(tweet);
-    res.send("OK");
+    res.status(201).send('OK');
 });
 
 app.listen(5000);
