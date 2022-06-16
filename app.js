@@ -31,4 +31,9 @@ app.get('/tweets', (req, res) => {
     res.send(tweetsPublicados);
 });
 
+app.post('/tweets', (req, res) => {
+    tweets.push(req.body);
+    res.send("OK");
+});
+
 app.listen(5000);
