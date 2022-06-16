@@ -183,11 +183,11 @@ app.get('/tweets', (req, res) => {
 });
 
 app.post('/tweets', (req, res) => {
-    if (req.body.username === "" || req.body.tweet === "") {
+    if (req.headers.user === "" || req.body.tweet === "") {
         res.status(400).send('Todos os campos são obrigatórios!');
     } else {
-        const usuario = usuarios.find(item => item.username === req.body.username);
-        const tweet = {...req.body, avatar: usuario.avatar};
+        const usuario = usuarios.find(item => item.username === req.headers.user);
+        const tweet = { username: req.headers.user, ...req.body, avatar: usuario.avatar };
         tweets.push(tweet);
         res.status(201).send('OK');
     }
