@@ -32,7 +32,9 @@ app.get('/tweets', (req, res) => {
 });
 
 app.post('/tweets', (req, res) => {
-    tweets.push(req.body);
+    const usuario = usuarios.find(item => item.username === req.body.username);
+    const tweet = {...req.body, avatar: usuario.avatar};
+    tweets.push(tweet);
     res.send("OK");
 });
 
