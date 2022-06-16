@@ -176,7 +176,7 @@ app.get('/tweets', (req, res) => {
         tweetsPublicados = tweetsPublicados.slice(page*10 - 10, page*10);
         res.send(tweetsPublicados);
     } else {
-        res.sendStatus(400);
+        res.status(400).send('Informe uma página válida!');
     }
     
 });
