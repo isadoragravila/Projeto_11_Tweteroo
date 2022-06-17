@@ -48,17 +48,12 @@ app.get('/tweets/:username', (req, res) => {
     const username = req.params.username;
     const userTweets = tweets.filter(tweet => tweet.username === username);
     let tweetsPublicados = [];
-    if (userTweets.length <= 10) {
-        for (let i = userTweets.length - 1; i >= 0; i--) {
-			const usuario = usuarios.find(item => item.username === userTweets[i].username);
-            tweetsPublicados.push({ ...userTweets[i], avatar: usuario.avatar });
-        }
-    } else {
-        for (let i = userTweets.length - 1; i >= userTweets.length - 10; i--) {
-            const usuario = usuarios.find(item => item.username === userTweets[i].username);
-            tweetsPublicados.push({ ...userTweets[i], avatar: usuario.avatar });
-        }
-    }
+    
+	for (let i = userTweets.length - 1; i >= 0; i--) {
+		const usuario = usuarios.find(item => item.username === userTweets[i].username);
+		tweetsPublicados.push({ ...userTweets[i], avatar: usuario.avatar });
+	}
+
     res.send(tweetsPublicados);
 });
 
